@@ -1,0 +1,31 @@
+{
+  "extends": ["prettier"],
+  "root": true,
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module"
+	},
+  "overrides": [
+    {
+      "files": ["*.config.js"],
+      "env": {
+        "node": true
+      }
+    },
+    {
+      "files": ["**/__tests__/*.*"],
+      "env": {
+        "es6": true,
+        "node": true,
+        "jest": true
+      },
+      "rules": {
+        "no-undefined": "off"
+      }
+    }
+  ]
+}
