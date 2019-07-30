@@ -7,6 +7,15 @@ import { add, greet } from '../index';
 // });
 
 describe('Greet', () => {
+	test.each`
+		a    | b    | expected
+		${1} | ${1} | ${2}
+		${1} | ${2} | ${3}
+		${2} | ${1} | ${3}
+	`('returns $expected when $a is added $b', ({ a, b, expected }) => {
+		expect(a + b).toBe(expected);
+	});
+
 	it('should return a string with the greeting "Hello, Bob."', () => {
 		const greeting = greet('Bob');
 		expect(greeting).toBe('Hello, Bob.');
@@ -35,5 +44,15 @@ describe('Greet', () => {
 	it('should return the string "Hello, Amy and Charlotte. AND HELLO BRIAN!" when name is an array containing ["Amy", "BRIAN", "Charlotte"]', () => {
 		const greeting = greet(['BRIAN', 'Amy', 'Charlotte']);
 		expect(greeting).toBe('Hello, Amy and Charlotte. AND HELLO BRIAN!');
+	});
+
+	it('should return the string "Hello, Bob, Charlie, and Dianne." when name is and array containing ["Bob", "Charlie, Dianne"]', () => {
+		const greeting = greet(['Bob', 'Charlie, Dianne']);
+		expect(greeting).toBe('Hello, Bob, Charlie, and Dianne.');
+	});
+
+	it('should return the string "Hello, Bob and Charlie, Dianne." when name is and array containing ["Bob", ""Charlie, Dianne""]', () => {
+		const greeting = greet(['Bob', '"Charlie, Dianne"']);
+		expect(greeting).toBe('Hello, Bob and Charlie, Dianne.');
 	});
 });
